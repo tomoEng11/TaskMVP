@@ -21,20 +21,20 @@ final class WebViewController: UIViewController {
 
   @IBOutlet private weak var webView: WKWebView!
 
-  private var githubModel: GithubModel?
+    var presenter: WebPresenterInput!
 
-  func configure(githubModel: GithubModel) {
-    self.githubModel = githubModel
-  }
+    func inject(presenter: WebPresenterInput!) {
+        self.presenter = presenter
+    }
+
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    guard
-      let githubModel = githubModel,
-      let url = URL(string: githubModel.urlStr) else {
-      return
-    }
-    webView.load(URLRequest(url: url))
+      presenter.makeRequest()
   }
+}
+extension WebViewController: WebPresenterOutput {
+    func load(request: URLRequest) {
+        webView.load(request)
+    }
 }

@@ -20,9 +20,11 @@ final class Router {
   private var window: UIWindow?
 
   func showRoot(window: UIWindow) {
-    guard let vc = UIStoryboard.init(name: "MVPSearch", bundle: nil).instantiateInitialViewController() else {
+    guard let vc = UIStoryboard.init(name: "MVPSearch", bundle: nil).instantiateInitialViewController() as? MVPSearchViewController else {
       return
     }
+      let presenter = GithubSearchPresenter(output: vc)
+      vc.inject(presenter: presenter)
     let nav = UINavigationController(rootViewController: vc)
     window.rootViewController = nav
     window.makeKeyAndVisible()
@@ -33,7 +35,9 @@ final class Router {
     guard let web = UIStoryboard.init(name: "Web", bundle: nil).instantiateInitialViewController() as? WebViewController else {
       return
     }
-    web.configure(githubModel: githubModel)
+
+      let presenter = WebPresenter(output: web, model: githubModel)
+      web.inject(presenter: presenter)
     show(from: from, to: web)
   }
 

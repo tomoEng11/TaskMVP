@@ -34,7 +34,9 @@ final class MVPSearchViewController: UIViewController {
     }
   }
 
-  private var items: [GithubModel] = []
+  var presenter: GithubSearchPresenterInput!
+
+//  private var items: [GithubModel] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -42,44 +44,52 @@ final class MVPSearchViewController: UIViewController {
     indicator.isHidden = true
   }
 
-  @objc func tapSearchButton(_sender: UIResponder) {
-    guard let searchWord = searchTextField.text, !searchWord.isEmpty else { return }
-    indicator.isHidden = false
-    tableView.isHidden = true
-    GithubAPI.shared.get(searchWord: searchWord) { result in
-      DispatchQueue.main.async {
-        self.indicator.isHidden = true
-        self.tableView.isHidden = false
-        switch result {
-        case .failure(let error):
-          print(error)
-        case .success(let items):
-          self.items = items
-          self.tableView.reloadData()
-        }
-      }
+    func inject(presenter: GithubSearchPresenterInput!) {
+        self.presenter = presenter
     }
+
+  @objc func tapSearchButton(_sender: UIResponder) {
+      presenter.searchText(searchText: searchTextField.text)
   }
+
 }
 
 extension MVPSearchViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    Router.shared.showWeb(from: self, githubModel: items[indexPath.item])
+      Router.shared.showWeb(from: self, githubModel: presenter.items(index: indexPath.row))
   }
 }
 
 extension MVPSearchViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    items.count
+      DLog()
+      return presenter.numberOfItems
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      DLog()
     guard let cell = tableView.dequeueReusableCell(withIdentifier: MVPTableViewCell.className) as? MVPTableViewCell else {
       fatalError()
     }
-    let githubModel = items[indexPath.item]
+      let githubModel = presenter.items(index: indexPath.row)
     cell.configure(githubModel: githubModel)
     return cell
   }
 }
+
+extension MVPSearchViewController: GithubSearchPresenterOutput {
+    func update(loading: Bool) {
+        DispatchQueue.main.async {
+            self.indicator.isHidden = loading
+            self.tableView.isHidden = !loading
+        }
+    }
+    func update(models: [GithubModel]) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            DLog()
+        }
+    }
+}
+

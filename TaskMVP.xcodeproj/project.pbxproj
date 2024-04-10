@@ -19,6 +19,8 @@
 		B6BAEF6825F8D9D8006E7088 /* GithubModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BAEF5E25F8D9D8006E7088 /* GithubModel.swift */; };
 		B6BAEF6925F8D9D8006E7088 /* GithubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BAEF6025F8D9D8006E7088 /* GithubAPI.swift */; };
 		B6BAEF6A25F8D9D8006E7088 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BAEF6125F8D9D8006E7088 /* Router.swift */; };
+		BB80222D2BC698D400997CD8 /* GithubSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB80222C2BC698D400997CD8 /* GithubSearchPresenter.swift */; };
+		BB8022302BC6BE8300997CD8 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB80222F2BC6BE8300997CD8 /* WebPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		B6BAEF5E25F8D9D8006E7088 /* GithubModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubModel.swift; sourceTree = "<group>"; };
 		B6BAEF6025F8D9D8006E7088 /* GithubAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubAPI.swift; sourceTree = "<group>"; };
 		B6BAEF6125F8D9D8006E7088 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		BB80222C2BC698D400997CD8 /* GithubSearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubSearchPresenter.swift; sourceTree = "<group>"; };
+		BB80222F2BC6BE8300997CD8 /* WebPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,7 @@
 		B6BAEF5225F8D9D8006E7088 /* Web */ = {
 			isa = PBXGroup;
 			children = (
+				BB80222E2BC6BE6D00997CD8 /* Presenter */,
 				B6BAEF5325F8D9D8006E7088 /* Controller */,
 			);
 			path = Web;
@@ -100,6 +105,7 @@
 		B6BAEF5625F8D9D8006E7088 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				BB80222B2BC698B100997CD8 /* Presenter */,
 				B6BAEF5725F8D9D8006E7088 /* Controller */,
 				B6BAEF5A25F8D9D8006E7088 /* View */,
 			);
@@ -139,6 +145,22 @@
 				B6BAEF6125F8D9D8006E7088 /* Router.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		BB80222B2BC698B100997CD8 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				BB80222C2BC698D400997CD8 /* GithubSearchPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		BB80222E2BC6BE6D00997CD8 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				BB80222F2BC6BE8300997CD8 /* WebPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,7 +241,9 @@
 				B6BAEF6A25F8D9D8006E7088 /* Router.swift in Sources */,
 				B6BAEF3C25F8D964006E7088 /* AppDelegate.swift in Sources */,
 				B6BAEF6725F8D9D8006E7088 /* MVPTableViewCell.swift in Sources */,
+				BB8022302BC6BE8300997CD8 /* WebPresenter.swift in Sources */,
 				B6BAEF6325F8D9D8006E7088 /* WebViewController.swift in Sources */,
+				BB80222D2BC698D400997CD8 /* GithubSearchPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
